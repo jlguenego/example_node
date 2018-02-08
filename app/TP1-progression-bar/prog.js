@@ -27,7 +27,6 @@ function iteration() {
         n++;
         progressionBar.update(n);
 		if (n > 80) {
-            progressionBar.update(70);
 			return;
 		}
 		iteration();
