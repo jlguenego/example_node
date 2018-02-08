@@ -1,0 +1,23 @@
+{
+  "name": "example_node",
+  "version": "1.0.0",
+  "description": "example_node ============",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlguenego/example_node.git"
+  },
+  "keywords": [
+    "node",
+    "example"
+  ],
+  "author": "Jean-Louis GUENEGO",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jlguenego/example_node/issues"
+  },
+  "homepage": "https://github.com/jlguenego/example_node#readme"
+}
