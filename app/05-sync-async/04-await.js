@@ -10,7 +10,6 @@ function appendFile(filename, data) {
             resolve();
         });
     });
-	
 }
 
 async function main() {
