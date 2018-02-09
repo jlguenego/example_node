@@ -42,6 +42,9 @@ const toArray = (...args) => {
 
 console.log('toArray(2, 4, 5): ', toArray(2, 4, 5));
 
+const {coucou} = {coucou: 'hello'};
+console.log('coucou:', coucou);
+
 
 
 
