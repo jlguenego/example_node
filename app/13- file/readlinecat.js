@@ -9,7 +9,7 @@ files.forEach((file) => {
 		let lineNbr = 0;
 		const stream = fs.createReadStream(path.resolve(__dirname, file));
 		stream
-			.pipe(es.split())
+			.pipe(es.split('\n'))
 			.pipe(es.map(function(line, cb) {
 				// pause the readstream
 				stream.pause();
@@ -27,8 +27,6 @@ files.forEach((file) => {
 					stream.resume();
 					cb(null, parsedLine);
 				}, 1000 / lineNbr);
-
-                
             }))
             .pipe(process.stdout);
 	} catch (e) {
