@@ -5,8 +5,5 @@ module.exports = function(gulp, pathConfig) {
 	gulp.task('clean:misc', function() {
 		return del(pathConfig.clean.misc);
 	});
-
-	
-
 	gulp.task('clean', ['clean:misc']);
 };
