@@ -1,6 +1,8 @@
 // 'use strict';
 
-name = 'JL';
+// It is better to use strict. So please correct this.
+
+name = 'John';
 
 module.exports = {
     hello: () => {
