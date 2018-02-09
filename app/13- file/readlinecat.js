@@ -7,7 +7,10 @@ const files = process.argv.slice(2);
 files.forEach((file) => {
 	try {
 		let lineNbr = 0;
-		const stream = fs.createReadStream(path.resolve(__dirname, file));
+        const stream = fs.createReadStream(path.resolve(__dirname, file));
+        stream.on('error', (...args) => {
+            console.log('Error: probably the file does not exist', args);
+        });
 		stream
 			.pipe(es.split('\n'))
 			.pipe(es.map(function(line, cb) {
@@ -33,3 +36,5 @@ files.forEach((file) => {
 		console.log('error', e);
 	}
 });
+
+
