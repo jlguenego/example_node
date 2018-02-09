@@ -69,6 +69,7 @@ citroen2CV.start();
 citroen2CV.stop();
 console.log('citroen2CV', citroen2CV);
 
+// eslint-disable-next-line no-use-before-define
 myTest();
 
 function myTest() {
@@ -112,24 +113,25 @@ function myTest2(a, b, c) {
 	});
 }
 
-// myTest2(1);
-// myTest2(1, 3, 12);
-// myTest2(1, 3, 12, 14);
-// var x = [1, 12, 3];
-// console.log(x);
-// x.forEach(function(n, i) {
-// 	console.log(n, i);
-// 	console.log('arguments', arguments);
-// });
-// x.length = 10;
-// console.log('x', x);
-// x['!@#$%asdf'] = 'hello';
-// x.$coucou = 'yeah';
-// console.log('x', x);
+myTest2(1);
+myTest2(1, 3, 12);
+myTest2(1, 3, 12, 14);
+var x = [1, 12, 3];
+console.log(x);
+x.forEach(function(n, i) {
+	console.log(n, i);
+	console.log('arguments', arguments);
+});
+x.length = 10;
+console.log('x', x);
+x['!@#$%asdf'] = 'hello';
+x.$coucou = 'yeah';
+console.log('x', x);
 
-// // Cast to number
-// var a = '34';
-// console.log('typeof a', typeof a);
-// console.log('typeof +a', typeof + a);
+// Cast to number
+var a = '34';
+console.log('typeof a', typeof a);
+console.log('typeof +a', typeof + a);
 
+// eslint-disable-next-line no-debugger
 debugger;

@@ -1,5 +1,6 @@
 'use strict';
 
+// Callback
 function hello() {
     console.log('hello');
 }
@@ -15,3 +16,18 @@ function repeatTwice(cb) {
 }
 
 repeatTwice(hello);
+
+// Closure example
+function testClosure() {
+    var x = 2;
+    function incrementX() {
+        x++;
+    }
+    console.log('x:', x);
+    incrementX();
+    console.log('x:', x);
+}
+
+testClosure();
+
+
