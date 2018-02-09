@@ -25,9 +25,11 @@
     "del": "^3.0.0",
     "eslint": "^4.17.0",
     "eslint-config-google": "^0.9.1",
+    "express": "^4.16.2",
     "gulp": "^3.9.1",
     "gulp-debug": "^3.2.0",
     "gulp-eslint": "^4.0.2",
-    "gulp-if": "^2.0.2"
+    "gulp-if": "^2.0.2",
+    "serve-index": "^1.9.1"
   }
 }
