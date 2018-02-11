@@ -10,30 +10,34 @@ const rl = readline.createInterface({
 	output: process.stdout
 });
 
-const client = new net.Socket();
+const socket = new net.Socket();
 
 function sendMessage() {
     rl.question('> ', (answer) => {
 		if (answer === 'bye') {
 			rl.close();
-            client.destroy(); // kill nicely client after server's response
+            socket.destroy(); // kill nicely client after server's response
             return;
         }
-		client.write(answer, c2sEncoding);
+		socket.write(answer, c2sEncoding);
 	});
 }
 
-client.connect(1234, '127.0.0.1', function() {
+socket.connect(1234, '127.0.0.1');
+
+// once connected, the connects event is emitted.
+socket.on('connect', () => {
 	console.log('Connected');
 	sendMessage();
 });
 
-client.on('data', function(data) {
+// each time the socket receives data, the data event is emitted.
+socket.on('data', function(data) {
 	const string = data.toString(s2cEncoding);
     console.log('Received: ' + string);
     sendMessage();
 });
 
-client.on('close', function() {
+socket.on('close', function() {
 	console.log('Connection closed');
 });
