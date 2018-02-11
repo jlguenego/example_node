@@ -35,5 +35,7 @@ process.on('disconnect', (...args) => {
 	console.log('disconnect: ', args);
 });
 
-// If you explicitely tell the process to exit, then no 'beforExit' event is emitted.
-// process.exit();
+// If you explicitely tell the process to exit, then no 'beforeExit' event is emitted.
+// process.exit(1337);
+
+// to retrieve the exit code 1337, just do on cmd "echo %ERRORLEVEL%", or "echo $?" in bash.
