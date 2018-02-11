@@ -19,7 +19,7 @@ function sendMessage() {
     rl.question('> ', (answer) => {
 		if (answer === 'bye') {
 			rl.close();
-            socket.destroy(); // kill nicely client after server's response
+            socket.destroy('titi'); // kill nicely client after server's response
             return;
         }
 		socket.write(answer, c2sEncoding);
@@ -43,8 +43,8 @@ socket.on('data', function(data) {
     sendMessage();
 });
 
-socket.on('close', function() {
-	console.log('Connection closed');
+socket.on('close', (...args) => {
+	console.log('Connection closed', args);
 });
 
 socket.on('drain', (...args) => {
