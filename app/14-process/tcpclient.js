@@ -3,7 +3,7 @@ const readline = require('readline');
 
 // writing on a socket stream needs to know the encoding.
 const c2sEncoding = 'utf16le';
-const s2cEncoding = 'utf16le';
+const s2cEncoding = 'utf8';
 
 const rl = readline.createInterface({
 	input: process.stdin,
@@ -31,6 +31,7 @@ socket.connect(1234, '127.0.0.1');
 // once connected, the connects event is emitted.
 socket.on('connect', () => {
 	console.log('Connected');
+	console.log('buffer size: ', socket.bufferSize);
 	sendMessage();
 });
 
@@ -38,9 +39,14 @@ socket.on('connect', () => {
 socket.on('data', function(data) {
 	const string = data.toString(s2cEncoding);
     console.log('Received: ' + string);
+    console.log('Byte readed: ' + socket.bytesRead);
     sendMessage();
 });
 
 socket.on('close', function() {
 	console.log('Connection closed');
+});
+
+socket.on('drain', (...args) => {
+	console.log('written', args);
 });

@@ -1,7 +1,7 @@
 const net = require('net');
 
 const c2sEncoding = 'utf16le';
-const s2cEncoding = 'utf16le';
+const s2cEncoding = 'utf8';
 
 const server = net.createServer((socket) => {
     console.log('new connection', socket);
@@ -12,7 +12,7 @@ const server = net.createServer((socket) => {
             socket.end('Bye!', s2cEncoding);
             return;
         }
-        socket.write(`Echo: ${string}\n`, s2cEncoding);
+        socket.write(`${string}`, s2cEncoding);
     });
 
     socket.on('close', (hasError) => {
