@@ -30,7 +30,7 @@ socket.connect(1234, '127.0.0.1');
 
 // once connected, the connects event is emitted.
 socket.on('connect', () => {
-	console.log('Connected');
+	console.log('Connected from:', socket.localAddress, socket.localPort);
 	console.log('buffer size: ', socket.bufferSize);
 	sendMessage();
 });

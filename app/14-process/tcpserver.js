@@ -4,7 +4,7 @@ const c2sEncoding = 'utf16le';
 const s2cEncoding = 'utf8';
 
 const server = net.createServer((socket) => {
-    console.log('new connection', socket);
+    console.log('new connection from:', socket.remoteAddress, socket.remotePort);
     socket.on('data', function(data) {
         const string = data.toString(c2sEncoding);
         console.log('string', string);
