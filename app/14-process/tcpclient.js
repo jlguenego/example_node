@@ -1,6 +1,7 @@
 const net = require('net');
 const readline = require('readline');
 
+// writing on a socket stream needs to know the encoding.
 const c2sEncoding = 'utf16le';
 const s2cEncoding = 'utf8';
 
