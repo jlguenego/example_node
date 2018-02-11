@@ -1,6 +1,9 @@
 const net = require('net');
 const readline = require('readline');
 
+const c2sEncoding = 'utf16le';
+const s2cEncoding = 'utf8';
+
 const rl = readline.createInterface({
 	input: process.stdin,
 	output: process.stdout
@@ -12,10 +15,10 @@ function sendMessage() {
     rl.question('> ', (answer) => {
 		if (answer === 'bye') {
 			rl.close();
-            client.destroy(); // kill client after server's response
+            client.destroy(); // kill nicely client after server's response
             return;
         }
-		client.write(answer);
+		client.write(answer, c2sEncoding);
 	});
 }
 
@@ -25,7 +28,8 @@ client.connect(1234, '127.0.0.1', function() {
 });
 
 client.on('data', function(data) {
-    console.log('Received: ' + data);
+	const string = data.toString(s2cEncoding);
+    console.log('Received: ' + string);
     sendMessage();
 });
 
