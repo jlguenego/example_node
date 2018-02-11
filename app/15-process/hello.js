@@ -1,4 +1,5 @@
 console.log(`hello, I am process id ${process.pid} and running on architecture ${process.arch}`);
+console.log(`hello, I am running in current dir: ${process.cwd()}`);
 console.log(`I have been run with the following argv: ${process.argv}`);
 console.log(`process.channel: ${process.channel}`);
 console.log('is the process connected to an IPC channel ?', (process.connected) ? 'Yes.' : 'No.');
