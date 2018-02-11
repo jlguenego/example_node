@@ -17,6 +17,11 @@ socket.setEncoding(s2cEncoding);
 
 function sendMessage() {
     rl.question('> ', (answer) => {
+		if (socket.destroyed) {
+			rl.close();
+			console.log('exit.');
+			return;
+		}
 		if (answer === 'bye') {
 			rl.close();
             socket.destroy('titi'); // kill nicely client after server's response
@@ -53,4 +58,12 @@ socket.on('drain', (...args) => {
 
 socket.on('error', (...args) => {
 	console.log('error', args);
+	rl.close();
+});
+
+
+socket.setTimeout(10000, (...args) => {
+	console.log('socket timeout', args);
+	rl.close();
+    socket.destroy();
 });
