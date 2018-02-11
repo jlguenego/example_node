@@ -1,8 +1,12 @@
-console.log(`hello, I am process id ${process.pid} and running on architecture ${process.arch}`);
+console.log(`hello, I am process id ${process.pid} 
+and running on architecture ${process.arch},
+on platform ${process.platform}`);
 console.log(`hello, I am running in current dir: ${process.cwd()}`);
 console.log(`I have been run with the following argv: ${process.argv}`);
+console.log(`I have access to all environment variable, for instance, the USERNAME is: ${process.env.USERNAME}`);
 console.log(`process.channel: ${process.channel}`);
 console.log('is the process connected to an IPC channel ?', (process.connected) ? 'Yes.' : 'No.');
+console.log(`The parent process is pid ${process.ppid}`);
 
 function wait(delay) {
 	console.log('wait starts.');

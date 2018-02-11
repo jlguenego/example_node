@@ -1,6 +1,6 @@
 const { spawn } = require('child_process');
 
-console.log(`hello, I am master process id ${process.pid}`);
+console.log(`hello, I am master process id ${process.pid}, running under Node version ${process.version}.`);
 
 
 console.log('about to run "node hello.js"');
@@ -29,6 +29,7 @@ process.on('beforeExit', (...args) => {
 
 // called when the program has to finish in all case.
 process.on('exit', (code) => {
+    console.log(`The process has been running for ${process.uptime()} seconds.`);
 	console.log(`About to exit with code: ${code}`);
 });
 
