@@ -1,7 +1,7 @@
 const net = require('net');
 
 const c2sEncoding = 'utf16le';
-const s2cEncoding = 'utf8';
+const s2cEncoding = 'utf16le';
 
 const server = net.createServer((socket) => {
     console.log('new connection', socket);

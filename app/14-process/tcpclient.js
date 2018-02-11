@@ -3,7 +3,7 @@ const readline = require('readline');
 
 // writing on a socket stream needs to know the encoding.
 const c2sEncoding = 'utf16le';
-const s2cEncoding = 'utf8';
+const s2cEncoding = 'utf16le';
 
 const rl = readline.createInterface({
 	input: process.stdin,
@@ -11,6 +11,9 @@ const rl = readline.createInterface({
 });
 
 const socket = new net.Socket();
+
+// encoding when reading data from server. (not writing)
+socket.setEncoding(s2cEncoding);
 
 function sendMessage() {
     rl.question('> ', (answer) => {
