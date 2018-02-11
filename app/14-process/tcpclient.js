@@ -50,3 +50,7 @@ socket.on('close', function() {
 socket.on('drain', (...args) => {
 	console.log('written', args);
 });
+
+socket.on('error', (...args) => {
+	console.log('error', args);
+});
