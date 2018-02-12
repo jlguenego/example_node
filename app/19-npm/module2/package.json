@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "hello-world": "git+https://github.com/jlguenego/hello-world.git",
+    "hello-world": "git+https://github.com/jlguenego/hello-world.git#1.0.0",
     "module1": "file:../module1"
   }
 }
