@@ -25,8 +25,6 @@ function mine(id) {
 	}
 }
 
-
-
 if (cluster.isMaster) {
 	console.log(`Master ${process.pid} is running`);
 
