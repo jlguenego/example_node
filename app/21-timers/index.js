@@ -15,9 +15,14 @@ process.nextTick(() => console.log('NT1'));
 setImmediate(() => console.log('IM2'));
 process.nextTick(() => console.log('NT2'));
 http.get(options, () => console.log('IO1'));
-fs.readdir(process.cwd(), () => console.log('IO2'));
+fs.readdir(process.cwd(), () => {
+    console.log('IO2');
+    setImmediate(() => console.log('IM5'));
+});
 setImmediate(() => console.log('IM3'));
 process.nextTick(() => console.log('NT3'));
 setImmediate(() => console.log('IM4'));
 fs.readdir(process.cwd(), () => console.log('IO3'));
+setTimeout(() => console.log('TO2'), 0);
+setTimeout(() => console.log('T11'), 1);
 console.log('Done');

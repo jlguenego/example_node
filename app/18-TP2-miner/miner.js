@@ -3,11 +3,19 @@ const numCPUs = require('os').cpus().length;
 const crypto = require('crypto');
 const fs = require('fs');
 
-const zeroes = new Array(6 + 1).join('0');
+const difficulty = 5;
+const zeroes = new Array(difficulty + 1).join('0');
 
 const workerNbr = numCPUs;
 
-const transaction = fs.readFileSync('transaction.input').toString();
+if (process.argv.length < 3) {
+	console.log('Syntax: node miner.js <filename>');
+	process.exit(1);
+}
+
+const filename = process.argv[2];
+
+const transaction = fs.readFileSync(filename).toString();
 
 function mine(id) {
 	let nonce = id;
