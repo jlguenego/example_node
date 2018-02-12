@@ -50,6 +50,24 @@ console.log('coucou:', coucou);
 var myFunction = {decr, incr};
 console.log('myFunction', myFunction);
 
+// call
+const myObj = {
+    '0': 'coucou',
+    '1': 34,
+    length: 2,
+}
+const array = Array.prototype.map.call(myObj, (n) => n + n);
+console.log('array', array);
+
+// apply
+const array2 = Array.prototype.map.apply(myObj, [(n) => n + n]);
+console.log('array2', array2);
+
+// bind
+const myMap = Array.prototype.map.bind(myObj);
+const array3 = myMap(n => n + n);
+console.log('array3', array3);
+
 
 
 
