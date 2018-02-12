@@ -103,10 +103,10 @@ console.log('i:', i);
 
 // Every function is variadic. 
 function myTest2(a, b, c) {
-	console.log('start');
+	console.log('myTest2: start');
 	console.log(a, b, c);
-	console.log(arguments);
-	console.log(arguments[3]);
+	console.log('arguments', arguments);
+	console.log('arguments[3]', arguments[3]);
 	console.log('is arguments an Array ?', arguments.constructor === Array);
 	Array.prototype.forEach.call(arguments, function(n, i) {
 		console.log(n, i);
