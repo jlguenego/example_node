@@ -55,7 +55,8 @@ const myObj = {
     '0': 'coucou',
     '1': 34,
     length: 2,
-}
+};
+
 const array = Array.prototype.map.call(myObj, (n) => n + n);
 console.log('array', array);
 
