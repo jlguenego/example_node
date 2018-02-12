@@ -14,8 +14,11 @@ const server = http.createServer((req, res) => {
 
 	if (method === 'GET') {
 		if (url.match(/\/hello.*/)) {
-			res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-			res.end(`Your GET url starts with hello. User agent: ${userAgent}`, 'utf8');
+            res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+            setTimeout(() => {
+                res.end(`Your GET url starts with hello and take 2s. User agent: ${userAgent}`, 'utf8');
+            }, 2000);
+			
 			return;
 		}
 		if (url.match(/\/world.*/)) {
