@@ -10,7 +10,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/date', (req, res) => {
-	console.log('date POST');
+	console.log('date GET');
 	res.json({ method: 'get', date: new Date() });
 });
 
