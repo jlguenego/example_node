@@ -9,12 +9,41 @@
 </head>
 
 <body>
-    <h1>Hello</h1>
-    <nav>
+	<nav>
 		<a href="./index.html">Home</a> |
 		<a href="./hello.html">Hello</a> |
 		<a href="./world.html">World</a>
 	</nav>
+	<h1>Hello</h1>
+	<form>
+		<label>
+			<input name="hello" type="text">
+		</label>
+		<button>Post Hello</button>
+	</form>
+	<script>
+		document.addEventListener("DOMContentLoaded", function(event) {
+			document.querySelector('form').onsubmit = function(event) {
+				try {
+					console.log('submit form');
+					const xhr = new XMLHttpRequest();
+					xhr.open("POST", "ws/hello", true);
+					xhr.setRequestHeader("Content-type", "raw");
+					xhr.send('coucou');
+					xhr.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							console.log(this.responseText);
+						}
+					};
+				} catch (e) {
+                    console.error('error', e);
+				}
+				return false;
+			};
+		});
+
+	</script>
+
 </body>
 
 </html>

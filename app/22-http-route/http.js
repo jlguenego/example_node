@@ -1,6 +1,8 @@
 const http = require('http');
 const fs = require('fs');
 
+const ws = require('./ws.js');
+
 const port = 9000;
 
 const server = http.createServer((req, res) => {
@@ -19,28 +21,20 @@ const server = http.createServer((req, res) => {
 				const content = fs.readFileSync('./world.html');
 				res.end(content, 'utf8');
 			} else {
-                let content = fs.readFileSync('./index.html');
-                content = content.toString().replace(/\*\*\*USER_AGENT\*\*\*/g, userAgent);
+				let content = fs.readFileSync('./index.html');
+				content = content.toString().replace(/\*\*\*USER_AGENT\*\*\*/g, userAgent);
 				res.end(content, 'utf8');
 			}
 			break;
 		case 'POST':
-			if (url.match(/\/hello.*/)) {
-				res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-				res.end('Your POST url starts with hello', 'utf8');
-				return;
-			} else if (url.match(/\/world.*/)) {
-				res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-				res.end('Your POST url starts with world', 'utf8');
-				return;
-			} else {
-				res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-				res.end('Your POST url is generic.', 'utf8');
-			}
-			break;
+			if (url.startsWith('/ws')) {
+                ws.manageWebService(req, res);
+                break;
+            }
+            // no break here.
 		default:
-			res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-			res.end('Your url is generic.', 'utf8');
+			res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+			res.end('Not found.', 'utf8');
 	}
 });
 
