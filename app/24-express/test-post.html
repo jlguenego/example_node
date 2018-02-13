@@ -15,22 +15,30 @@
 		<a href="./world.html">World</a>
 	</nav>
 	<h1>Hello</h1>
-	<form>
+	<h2>Méthode POST (application/json)</h2>
+	<form id="json">
 		<label>
 			<input name="hello" type="text" value="Dany">
 		</label>
 		<button>Post Hello</button>
 	</form>
 	<p id="response"></p>
+	<h2>Méthode POST (application/x-www-form-urlencoded)</h2>
+	<form action="ws/hello2" method="POST">
+		<label>
+			<input name="name" type="text" value="Dany">
+		</label>
+		<button>Post Hello</button>
+	</form>
 	<script>
 		document.addEventListener("DOMContentLoaded", function(event) {
-			document.querySelector('form').onsubmit = function(event) {
+			document.querySelector('#json').onsubmit = function(event) {
 				try {
 					const xhr = new XMLHttpRequest();
 					xhr.open("POST", "ws/hello", true);
 					xhr.setRequestHeader("Content-type", "application/json");
 					xhr.send(JSON.stringify({
-						name: document.querySelector('input').value
+						name: document.querySelector('input[name="hello"]').value
 					}));
 					xhr.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {
@@ -43,6 +51,8 @@
 				}
 				return false;
 			};
+
+			
 		});
 
 	</script>
