@@ -26,7 +26,7 @@ app.post('/ws/hello2', (req, res, next) => {
 		res.status(500).send('/ws/hello2 webservice failed: name missing.');
 		return;
 	}
-	let content = fs.readFileSync(path.resolve(__dirname, './hello2.html'));
+	let content = fs.readFileSync(path.resolve(__dirname, './hello-result.html'));
 	content = content.toString().replace(/\*\*\*NAME\*\*\*/g, req.body.name);
 	res.send(content);
 });
