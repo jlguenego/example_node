@@ -8,7 +8,7 @@ class WebServiceManager {
 			return;
 		}
 		if (url.match(/\/ws\/hello/)) {
-			let body = 'x ';
+			let body = '';
 			req.on('data', function(data) {
 				body += data;
 				console.log('Partial body: ' + body);

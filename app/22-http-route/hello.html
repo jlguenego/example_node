@@ -17,22 +17,23 @@
 	<h1>Hello</h1>
 	<form>
 		<label>
-			<input name="hello" type="text">
+			<input name="hello" type="text" value="JL">
 		</label>
 		<button>Post Hello</button>
-	</form>
+    </form>
+    <p id="response"></p>
 	<script>
 		document.addEventListener("DOMContentLoaded", function(event) {
 			document.querySelector('form').onsubmit = function(event) {
 				try {
-					console.log('submit form');
 					const xhr = new XMLHttpRequest();
 					xhr.open("POST", "ws/hello", true);
 					xhr.setRequestHeader("Content-type", "raw");
-					xhr.send('coucou');
+					xhr.send(document.querySelector('input').value);
 					xhr.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {
-							console.log(this.responseText);
+                            document.querySelector('#response').innerHTML = 
+                                `Hello ${JSON.parse(this.responseText).hello} !`;
 						}
 					};
 				} catch (e) {

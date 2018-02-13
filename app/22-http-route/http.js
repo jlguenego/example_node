@@ -29,9 +29,8 @@ const server = http.createServer((req, res) => {
 		case 'POST':
 			if (url.startsWith('/ws')) {
                 ws.manageWebService(req, res);
-                break;
             }
-            // no break here.
+            break;
 		default:
 			res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
 			res.end('Not found.', 'utf8');
