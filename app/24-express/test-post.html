@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Hello</title>
+</head>
+
+<body>
+	<nav>
+		<a href="./index.html">Home</a> |
+		<a href="./hello.html">Hello</a> |
+		<a href="./world.html">World</a>
+	</nav>
+	<h1>Hello</h1>
+	<form>
+		<label>
+			<input name="hello" type="text" value="Dany">
+		</label>
+		<button>Post Hello</button>
+	</form>
+	<p id="response"></p>
+	<script>
+		document.addEventListener("DOMContentLoaded", function(event) {
+			document.querySelector('form').onsubmit = function(event) {
+				try {
+					const xhr = new XMLHttpRequest();
+					xhr.open("POST", "ws/hello", true);
+					xhr.setRequestHeader("Content-type", "application/json");
+					xhr.send(JSON.stringify({
+						name: document.querySelector('input').value
+					}));
+					xhr.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							document.querySelector('#response').innerHTML =
+								`Hello ${JSON.parse(this.responseText).hello} !`;
+						}
+					};
+				} catch (e) {
+					console.error('error', e);
+				}
+				return false;
+			};
+		});
+
+	</script>
+
+</body>
+
+</html>
