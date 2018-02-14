@@ -2,19 +2,14 @@ const mongoose = require('mongoose');
 
 async function main() {
 	try {
-		mongoose.connect('mongodb://localhost/MyFirstDatabase');
+		await mongoose.connect('mongodb://localhost/MyFirstDatabase');
 
 		const Cat = mongoose.model('Cat',
 			new mongoose.Schema({
-				name: {
-					type: String,
-					required: true,
-					unique: true
-				},
+				name: { type: String, required: true, unique: true },
 				age: Number,
 			}, {
-				// allow other field to be saved in MongoDB.
-				strict: false
+				strict: false, // allow other field to be saved in MongoDB.
 			}));
 
 		let result = await Cat.remove({});
