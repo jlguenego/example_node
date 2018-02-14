@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "TP4",
-		"_postman_id": "e7c13615-31c6-6205-9079-0a76bbdf457c",
+		"_postman_id": "7f4948a0-345b-8db2-29fe-dfa8d6d49817",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -20,7 +20,8 @@
 							"key": "img",
 							"description": "",
 							"type": "file",
-							"src": "truck.jpg"
+							"src": "truck.jpg",
+							"value": ""
 						}
 					]
 				},
@@ -41,7 +42,8 @@
 							"key": "img",
 							"description": "",
 							"type": "file",
-							"src": "truck.jpg"
+							"src": "truck.jpg",
+							"value": ""
 						},
 						{
 							"key": "model",
@@ -74,7 +76,8 @@
 							"key": "img",
 							"description": "",
 							"type": "file",
-							"src": "truck.jpg"
+							"src": "truck.jpg",
+							"value": ""
 						},
 						{
 							"key": "model",
@@ -107,7 +110,8 @@
 							"key": "img",
 							"description": "",
 							"type": "file",
-							"src": "truck.jpg"
+							"src": "truck.jpg",
+							"value": ""
 						},
 						{
 							"key": "model",
@@ -204,6 +208,26 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"model\": \"Big truck\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create new Vehicle without image",
+			"request": {
+				"url": "http://localhost:8000/ws/vehicle",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"model\": \"truck\",\n    \"year\": \"2004\"\n}"
 				},
 				"description": ""
 			},

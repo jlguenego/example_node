@@ -28,7 +28,7 @@ class Rest {
 			console.log('create req.url', req.url);
 
 			// upload file if any
-			if (req.file.path) {
+			if (req.file && req.file.path) {
 				const orig = path.resolve(req.file.path);
 				const extension = req.file.originalname.replace(/^.+\.([^.]+?)$/, '$1').toLowerCase();
 				const dest = `${orig}.${extension}`;
