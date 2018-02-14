@@ -2,21 +2,31 @@ const mongoose = require('mongoose');
 
 async function main() {
 	try {
-
-
 		mongoose.connect('mongodb://localhost/MyFirstDatabase');
 
-		const Cat = mongoose.model('Cat', { name: String });
+		const Cat = mongoose.model('Cat',
+			new mongoose.Schema({
+				name: {
+					type: String,
+					required: true,
+					unique: true
+				}
+			}));
 
-		const kitty = new Cat({ name: 'Zildjian' });
+		let result = await Cat.remove({});
+		console.log(`${result.n} cats have been deleted.`);
+		const kitty = new Cat({ name: 'Garfield' });
 		await kitty.save();
-		const garfield = new Cat({ toto: 'Garfield' });
-		await garfield.save();
-		console.log('meow');
-		mongoose.connection.close();
+		const azrael = new Cat({ name: 'Azrael', age: 1 });
+		await azrael.save();
+		const cat = await Cat.findOne({ name: 'Azrael' });
+
+		console.log('cat.name', cat.name);
+		await mongoose.connection.close();
+		console.log('connection closed.');
 	} catch (e) {
-        console.error('error', e);
-        process.exit(1);
+		console.error('error', e.message);
+		process.exit(1);
 	}
 
 }
