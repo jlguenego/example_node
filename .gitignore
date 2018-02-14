@@ -2,5 +2,5 @@ node_modules/
 *.txt
 *.log
 /https/out
-24-express/uploads/
+uploads/
 24-express/files/
