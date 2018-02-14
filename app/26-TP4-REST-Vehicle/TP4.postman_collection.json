@@ -18,9 +18,9 @@
 					"formdata": [
 						{
 							"key": "img",
-							"value": "",
 							"description": "",
-							"type": "file"
+							"type": "file",
+							"src": "truck.jpg"
 						}
 					]
 				},
@@ -41,11 +41,11 @@
 							"key": "img",
 							"description": "",
 							"type": "file",
-							"src": "semi-remorque.jpg"
+							"src": "truck.jpg"
 						},
 						{
 							"key": "model",
-							"value": "voiture",
+							"value": "My super truck",
 							"description": "",
 							"type": "text"
 						},
@@ -56,6 +56,154 @@
 							"type": "text"
 						}
 					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve all Vehicle",
+			"request": {
+				"url": "http://localhost:8000/ws/vehicle",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "img",
+							"description": "",
+							"type": "file",
+							"src": "truck.jpg"
+						},
+						{
+							"key": "model",
+							"value": "My super truck",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "year",
+							"value": "2010",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve one Vehicle",
+			"request": {
+				"url": "http://localhost:8000/ws/vehicle/2",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "img",
+							"description": "",
+							"type": "file",
+							"src": "truck.jpg"
+						},
+						{
+							"key": "model",
+							"value": "My super truck",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "year",
+							"value": "2010",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update PUT Vehicle",
+			"request": {
+				"url": "http://localhost:8000/ws/vehicle/2",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"model\": \"truck\",\n    \"img\": \"uploads/vehicle/30408a97af8f470673fe825e03293c32.jpg\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update PATCH Vehicle",
+			"request": {
+				"url": "http://localhost:8000/ws/vehicle/3",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"model\": \"Big truck\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete one  Vehicle",
+			"request": {
+				"url": "http://localhost:8000/ws/vehicle/1",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"model\": \"Big truck\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all  Vehicle",
+			"request": {
+				"url": "http://localhost:8000/ws/vehicle",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"model\": \"Big truck\"\n}"
 				},
 				"description": ""
 			},
