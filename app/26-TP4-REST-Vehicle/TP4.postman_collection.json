@@ -1,0 +1,65 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TP4",
+		"_postman_id": "e7c13615-31c6-6205-9079-0a76bbdf457c",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Upload new Image",
+			"request": {
+				"url": "http://localhost:8000/ws/vehicle/upload",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "img",
+							"value": "",
+							"description": "",
+							"type": "file"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create new Vehicle",
+			"request": {
+				"url": "http://localhost:8000/ws/vehicle",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "img",
+							"description": "",
+							"type": "file",
+							"src": "semi-remorque.jpg"
+						},
+						{
+							"key": "model",
+							"value": "voiture",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "year",
+							"value": "2010",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
