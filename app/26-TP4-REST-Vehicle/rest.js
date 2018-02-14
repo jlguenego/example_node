@@ -17,15 +17,25 @@ class Rest {
 		// upload
 		app.post('/upload', upload.single('img'), function(req, res, next) {
 			const orig = path.resolve(req.file.path);
-			const extension = req.file.originalname.replace(/^.+\.([^.]+?)$/, '$1');
+			const extension = req.file.originalname.replace(/^.+\.([^.]+?)$/, '$1').toLowerCase();
 			const dest = `${orig}.${extension}`;
 			fs.renameSync(orig, dest);
-			res.status(201).json({ url: `${uploadDir}/${req.file.path}.${extension}` });
+			res.status(201).json({ url: `${req.file.path}.${extension}` });
 		});
 
 		// create
-		app.post('/', (req, res, next) => {
+		app.post('/', upload.single('img'), (req, res, next) => {
 			console.log('create req.url', req.url);
+
+			// upload file if any
+			if (req.file.path) {
+				const orig = path.resolve(req.file.path);
+				const extension = req.file.originalname.replace(/^.+\.([^.]+?)$/, '$1').toLowerCase();
+				const dest = `${orig}.${extension}`;
+				fs.renameSync(orig, dest);
+				req.body.img = `${req.file.path}.${extension}`;
+			}
+
 			const resource = req.body;
 			id++;
 			resource.id = id;

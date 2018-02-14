@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Upload test</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Upload test</title>
 </head>
+
 <body>
-    <h1>Upload test</h1>
-    <form action="ws/vehicle/upload" method="POST" enctype="multipart/form-data">
-        <input name="img" type="file">
-        <button>Upload</button>
-    </form>
+	<h1>Upload test</h1>
+	<form id="upload" action="ws/vehicle/upload" method="POST" enctype="multipart/form-data">
+		<input name="img" type="file">
+        <!-- <input type="submit" value="Upload"> -->
+        <button form="upload">Upload</button>
+	</form>
+
+	<h1>Create test</h1>
+	<form id="create" action="ws/vehicle" method="POST" enctype="multipart/form-data">
+		<label> Photo:
+			<input name="img" type="file">
+		</label>
+		<br>
+		<label>Model:
+			<input name="model" type="text">
+		</label>
+		<br>
+		<label>Year:
+			<input name="year" type="text">
+		</label>
+		<br>
+        <!-- <input type="submit" value="Create"> -->
+        <button form="create">Create</button>
+	</form>
 </body>
+
 </html>
