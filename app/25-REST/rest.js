@@ -1,9 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-
-
-
 class Rest {
 	resource(name) {
 		const app = express.Router();
