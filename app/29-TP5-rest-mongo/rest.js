@@ -48,30 +48,23 @@ class Rest {
 		});
 
 		// update (strong rewrite)
-		app.put('/:id', (req, res, next) => {
+		app.put('/:id', async (req, res, next) => {
 			console.log('update put req.url', req.url);
-			const resource = resources.find((r) => {
-				return r.id === +req.params.id;
-			});
-			if (!resource) {
-				res.status(404).send({ error: `resource ${name} not found for id ${req.params.id}` });
-				return;
+			try {
+				const id = mongoose.Types.ObjectId(req.params.id);
+				let resource = await model.findById(id);
+				if (resource === null) {
+					res.status(404).json({ error: 'Object not found' });
+					return;
+				}
+				await resource.update(req.body, {
+					overwrite: true
+				});
+				resource = await model.findById(id);
+				res.json({ content: resource });
+			} catch (e) {
+				res.status(400).json({ error: e.message });
 			}
-			// remove the old resource
-			const index = resources.findIndex((r) => {
-				return r.id === +req.params.id;
-			});
-			resources.splice(index, 1);
-
-			// create a new one with the old id.
-			const newResource = req.body;
-			newResource.id = +req.params.id;
-			resources.push(newResource);
-			resources.sort((a, b) => {
-				return Math.sign(a.id - b.id);
-			});
-
-			res.json({ content: newResource });
 		});
 
 		// update (small update with diff)
