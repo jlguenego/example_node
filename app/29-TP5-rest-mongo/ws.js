@@ -26,7 +26,16 @@ const User = mongoose.model('User',
 		strict: false, // allow other field to be saved in MongoDB.
 	}));
 
-mongoose.connect('mongodb://localhost/TP5');
+async function connect() {
+	try {
+		await mongoose.connect('mongodb://localhost/TP5');
+		console.log('connected to MongoDB.');
+	} catch (e) {
+		console.log('error while connecting to MongoDB.', e.message);
+		process.exit(1);
+	}
+}
+connect();
 
 const resources = [{ model: Ticket, rest: 'tickets' }, { model: User, rest: 'users' }];
 
