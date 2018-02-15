@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 
 async function main() {
 	try {
-		await mongoose.connect('mongodb://localhost/MyFirstDatabase');
-
 		const Cat = mongoose.model('Cat',
 			new mongoose.Schema({
 				name: { type: String, required: true, unique: true },
@@ -11,6 +9,8 @@ async function main() {
 			}, {
 				strict: false, // allow other field to be saved in MongoDB.
 			}));
+
+		await mongoose.connect('mongodb://localhost/MyFirstDatabase');
 
 		let result = await Cat.remove({});
 		console.log(`${result.n} cats have been deleted.`);
