@@ -68,57 +68,52 @@ class Rest {
 		});
 
 		// update (small update with diff)
-		app.patch('/:id', (req, res, next) => {
-			console.log('update patch req.url', req.url);
-			let resource = resources.find((r) => {
-				return r.id === +req.params.id;
-			});
-			if (!resource) {
-				res.status(404).send({ error: `resource ${name} not found for id ${req.params.id}` });
-				return;
+		app.patch('/:id', async (req, res, next) => {
+			console.log('update put req.url', req.url);
+			try {
+				const id = mongoose.Types.ObjectId(req.params.id);
+				let resource = await model.findById(id);
+				if (resource === null) {
+					res.status(404).json({ error: 'Object not found' });
+					return;
+				}
+				await resource.update(req.body, {
+					// PATCH want an overwrite set to false
+					overwrite: false
+				});
+				resource = await model.findById(id);
+				res.json({ content: resource });
+			} catch (e) {
+				res.status(400).json({ error: e.message });
 			}
-			// remove the old resource from the array
-			const index = resources.findIndex((r) => {
-				return r.id === +req.params.id;
-			});
-			resources.splice(index, 1);
-
-			const newResource = Object.assign(resource, req.body);
-			newResource.id = +req.params.id;
-			resources.push(newResource);
-			resources.sort((a, b) => {
-				return Math.sign(a.id - b.id);
-			});
-
-			res.json({ content: newResource });
 		});
 
 		// delete one
-		app.delete('/:id', (req, res, next) => {
+		app.delete('/:id', async (req, res, next) => {
 			console.log('delete one req.url', req.url);
-			const resource = resources.find((r) => {
-				return r.id === +req.params.id;
-			});
-			if (!resource) {
-				res.status(404).send({ error: `resource ${name} not found for id ${req.params.id}` });
-				return;
+			try {
+				const id = mongoose.Types.ObjectId(req.params.id);
+				let resource = await model.findById(id);
+				if (resource === null) {
+					res.status(404).json({ error: 'Object not found' });
+					return;
+				}
+				await model.deleteOne({_id: req.params.id});
+				res.json({ content: resource });
+			} catch (e) {
+				res.status(400).json({ error: e.message });
 			}
-			// remove the old resource
-			const index = resources.findIndex((r) => {
-				return r.id === +req.params.id;
-			});
-			resources.splice(index, 1);
-
-			res.json({ content: resource });
 		});
 
 		// delete all
-		app.delete('/', (req, res, next) => {
+		app.delete('/', async (req, res, next) => {
 			console.log('delete all req.url', req.url);
-
-			// remove all
-			resources.length = 0;
-			res.status(204).json({ message: `all ${name} successfully deleted.` });
+			try {
+				await model.deleteMany({});
+				res.status(204).end();
+			} catch (e) {
+				res.status(400).json({ error: e.message });
+			}
 		});
 
 		return app;
