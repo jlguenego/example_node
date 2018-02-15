@@ -1,4 +1,4 @@
-const assert = require('chai').assert;
+const assert = require('assert');
 describe('Array', function() {
 	describe('#indexOf()', function() {
 		it('should wait at least 1000ms before executing.', function(done) {
@@ -9,7 +9,7 @@ describe('Array', function() {
 				assert.ok(test);
 				done();
 			}, 1000);
-			
+
 		});
 	});
 });
