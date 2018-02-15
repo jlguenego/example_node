@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/jlguenego/example_node#readme",
   "dependencies": {
+    "chai": "^4.1.2",
     "chalk": "^2.3.0",
     "del": "^3.0.0",
     "ejs": "^2.5.7",
