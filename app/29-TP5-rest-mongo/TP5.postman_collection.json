@@ -1,0 +1,193 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TP5",
+		"_postman_id": "694f9efc-ca04-b19b-e9d5-27e9650a6eda",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create new User Fail",
+			"request": {
+				"url": "http://localhost:8000/ws/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"model\": \"Big truck\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create new User Success",
+			"request": {
+				"url": "http://localhost:8000/ws/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lastname\": \"Phengsiaroun\",\n    \"firstname\": \"Dany\",\n    \"_id\": \"012345678901234567890123\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve all User",
+			"request": {
+				"url": "http://localhost:8000/ws/users",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lastname\": \"Phengsiaroun\",\n    \"firstname\": \"Dany\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve one User Fail",
+			"request": {
+				"url": "http://localhost:8000/ws/users/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lastname\": \"Phengsiaroun\",\n    \"firstname\": \"Dany\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve one User Success",
+			"request": {
+				"url": "http://localhost:8000/ws/users/012345678901234567890123",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lastname\": \"Phengsiaroun\",\n    \"firstname\": \"Dany\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update one User",
+			"request": {
+				"url": "http://localhost:8000/ws/users/012345678901234567890123",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"lastname\": \"Guénégo\",\n    \"firstname\": \"Jean-Louis\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update one User PATCH",
+			"request": {
+				"url": "http://localhost:8000/ws/users/012345678901234567890123",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstname\": \"Suzana\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete one User",
+			"request": {
+				"url": "http://localhost:8000/ws/users/012345678901234567890123",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all User",
+			"request": {
+				"url": "http://localhost:8000/ws/users",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
