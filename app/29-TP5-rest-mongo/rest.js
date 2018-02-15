@@ -1,42 +1,50 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose  = require('mongoose');
 
 class Rest {
-	resource(name) {
+	resource(model) {
 		const app = express.Router();
 		app.use(bodyParser.json());
 
-		const resources = [];
-		let id = 0;
-
 		// create
-		app.post('/', (req, res, next) => {
+		app.post('/', async (req, res, next) => {
 			console.log('create req.url', req.url);
-			const resource = req.body;
-			id++;
-			resource.id = id;
-			resources.push(resource);
-			res.status(201).json({ content: resource });
+			try {
+				const object = new model(req.body);
+				await object.save();
+				res.status(201).json({ content: object });
+			} catch (e) {
+				res.status(400).json({ error: e.message });
+			}
+
 		});
 
 		// retrieve all
-		app.get('/', (req, res, next) => {
+		app.get('/', async (req, res, next) => {
 			console.log('retrieve all req.url', req.url);
-			res.json({ content: resources });
+			try {
+				const resources = await model.find({});
+				res.json({ content: resources });
+			} catch (e) {
+				res.status(400).json({ error: e.message });
+			}
 		});
 
 		// retrieve one
-		app.get('/:id', (req, res, next) => {
+		app.get('/:id', async (req, res, next) => {
 			console.log('retrieve one req.url', req.url);
-			const resource = resources.find((r) => {
-				console.log('req.params.id', req.params.id);
-				return r.id === +req.params.id;
-			});
-			if (!resource) {
-				res.status(404).send({ error: `resource ${name} not found for id ${req.params.id}` });
-				return;
+			try {
+				const id = mongoose.Types.ObjectId(req.params.id);
+				const resource = await model.findById(id);
+				if (resource === null) {
+					res.status(404).json({ error: 'Object not found' });
+					return;
+				}
+				res.json({ content: resource });
+			} catch (e) {
+				res.status(400).json({ error: e.message });
 			}
-			res.json({ content: resource });
 		});
 
 		// update (strong rewrite)
