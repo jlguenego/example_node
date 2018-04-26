@@ -3,25 +3,29 @@ const path = require('path');
 const es = require('event-stream');
 const { configure, client } = require('./configure-elastic');
 
-const BULK_SIZE = 30;
+const BULK_SIZE = 5;
 
 let myId = 0;
 
 async function main() {
     try {
         await configure();
+        console.time('load');
         const csvFilename = path.resolve(__dirname, './input.csv');
         const readStream = fs.createReadStream(csvFilename);
         let acc = [];
         const stream = readStream
             .pipe(es.split('\n'));
 
-        stream.pipe(es.map(async (line, cb) => {
+        stream.pipe(es.through(async (line) => {
             myId++;
             const csvId = myId;
-            stream.pause();
-            console.log('pause', csvId);
+            // stream.pause();
+            // console.log('pause', csvId);
             const [id, x, y] = line.split(';');
+            if (isNaN(x)) {
+                return;
+            }
             const obj = {
                 id: +id,
                 x: +x,
@@ -29,20 +33,27 @@ async function main() {
             };
             acc.push({ index: { _index: 'hello', _type: 'world', _id: obj.id } });
             acc.push(obj);
-            console.log('acc.length', acc.length);
+            // console.log('acc.length', acc.length);
             if (acc.length >= BULK_SIZE * 2) {
-                console.log('about to send bulk', csvId);
+                // console.log('about to send bulk', csvId);
                 const body = acc;
                 acc = [];
                 await client.bulk({ body });
-                console.log('bulk sent', csvId);
+                console.log('bulk sent', csvId, body);
             }
-            console.log('resume', csvId);
-            stream.resume();
+            // console.log('resume', csvId);
+            // stream.resume();
 
-            cb(null);
+            // cb(null);
+        }, async () => {
+            const body = acc;
+            acc = [];
+            await client.bulk({ body });
+            console.log('last bulk sent', body);
+            console.timeEnd('load');
         }));
-        // await client.bulk({ body: acc });
+
+
     } catch (e) {
         console.log('error', e);
     }
