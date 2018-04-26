@@ -11,26 +11,27 @@ files.forEach((file) => {
 		stream.on('error', (...args) => {
 			console.log('Error: probably the file does not exist', args);
 		});
-		stream
-			.pipe(es.split('\n'))
-			.pipe(es.map(function(line, cb) {
-				// pause the readstream
-				stream.pause();
-				// work (synchronous in this example)
-				lineNbr++;
-				const nbr = `${lineNbr}`.padStart(3);
+		const s = stream
+			.pipe(es.split('\n'));
 
-				setTimeout(() => {
-					const parsedLine = `${nbr}:\t${line}\n`;
+		s.pipe(es.map(function (line, cb) {
+			// pause the readstream
+			s.pause();
+			// work (synchronous in this example)
+			lineNbr++;
+			const nbr = `${lineNbr}`.padStart(3);
 
-					// if you do this, you will not be sure to print in the right order.
-					// process.stdout.write(parsedLine);
+			setTimeout(() => {
+				const parsedLine = `${nbr}:\t${line}\n`;
 
-					// resume the readstream when you are finished to process the line.
-					stream.resume();
-					cb(null, parsedLine);
-				}, 1000 / lineNbr);
-			}))
+				// if you do this, you will not be sure to print in the right order.
+				// process.stdout.write(parsedLine);
+
+				// resume the readstream when you are finished to process the line.
+				s.resume();
+				cb(null, parsedLine);
+			}, 200);
+		}))
 			.pipe(process.stdout);
 	} catch (e) {
 		console.log('error', e);
