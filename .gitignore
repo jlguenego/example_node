@@ -1,6 +1,7 @@
 node_modules/
 *.txt
 *.log
+*.csv
 /https/out
 uploads/
 24-express/files/
