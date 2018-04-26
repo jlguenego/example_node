@@ -27,6 +27,7 @@
     "chalk": "^2.3.0",
     "del": "^3.0.0",
     "ejs": "^2.5.7",
+    "elasticsearch": "^14.2.2",
     "eslint": "^4.17.0",
     "eslint-config-google": "^0.9.1",
     "event-stream": "^3.3.4",
