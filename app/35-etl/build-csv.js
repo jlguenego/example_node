@@ -1,15 +1,15 @@
 const fs = require('fs');
-const util = require('util');
-
-
+const path = require('path');
 
 async function main() {
     try {
-        const csvFilename = 'input.csv';
+        const csvFilename = path.resolve(__dirname, './input.csv');
         const writeStream = fs.createWriteStream(csvFilename);
-        for (let i = 0; i < 20; i++) {
-            const line = util.format('%s;%s\n', i.toString().padStart(8, 0), 'titi' + i);
-            await writeStream.write(line, 'utf8');
+        for (let i = 0; i < 200; i++) {
+            const x = Math.random() * 30;
+            const y = Math.random() * 20;
+            const line = [i, x, y].join(';');
+            await writeStream.write(line + '\n', 'utf8');
         }
         writeStream.close();
         console.log('end with success.');
