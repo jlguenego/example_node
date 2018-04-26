@@ -3,7 +3,7 @@ const path = require('path');
 const es = require('event-stream');
 const { configure, client } = require('./configure-elastic');
 
-const BULK_SIZE = 5;
+const BULK_SIZE = 3000;
 
 let myId = 0;
 
@@ -39,7 +39,7 @@ async function main() {
                 const body = acc;
                 acc = [];
                 await client.bulk({ body });
-                console.log('bulk sent', csvId, body);
+                console.log('bulk sent', csvId);
             }
             // console.log('resume', csvId);
             // stream.resume();
@@ -48,8 +48,10 @@ async function main() {
         }, async () => {
             const body = acc;
             acc = [];
-            await client.bulk({ body });
-            console.log('last bulk sent', body);
+            if (body.length > 0) {
+                await client.bulk({ body });
+            }
+            console.log('last bulk sent');
             console.timeEnd('load');
         }));
 
