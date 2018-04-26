@@ -20,8 +20,6 @@ async function main() {
         stream.pipe(es.through(async (line) => {
             myId++;
             const csvId = myId;
-            // stream.pause();
-            // console.log('pause', csvId);
             const [id, x, y] = line.split(';');
             if (isNaN(x)) {
                 return;
@@ -41,10 +39,6 @@ async function main() {
                 await client.bulk({ body });
                 console.log('bulk sent', csvId);
             }
-            // console.log('resume', csvId);
-            // stream.resume();
-
-            // cb(null);
         }, async () => {
             const body = acc;
             acc = [];
