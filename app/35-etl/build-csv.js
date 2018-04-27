@@ -5,7 +5,7 @@ async function main() {
     try {
         const csvFilename = path.resolve(__dirname, './input.csv');
         const writeStream = fs.createWriteStream(csvFilename);
-        for (let i = 0; i < 1000000; i++) {
+        for (let i = 0; i < 20; i++) {
             const x = Math.random() * Math.random() * 30;
             const y = Math.random() * Math.random() * 20;
             const line = [i, x, y].join(';');
