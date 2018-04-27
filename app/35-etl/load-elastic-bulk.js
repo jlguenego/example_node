@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const es = require('event-stream');
-const { configure, client } = require('./configure-elastic');
+const { configure, client } = require('./lib/configure-elastic');
 
 const BULK_SIZE = 3000;
 
