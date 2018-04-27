@@ -35,7 +35,7 @@ async function main() {
         const writeStream = new stream.Writable({ objectMode: true });
         writeStream._write = async function (chunk, enc, next) {
             const source = chunk._source;
-            console.log('a hit', source);
+            // console.log('a hit', source);
             await client.hmsetAsync(`point:${source.id}`, 'id', source.id, 'x', source.x, 'y', source.y);
             next();
         };
