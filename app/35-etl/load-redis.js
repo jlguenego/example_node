@@ -1,7 +1,6 @@
 // load from elasticsearch to redis.
 const stream = require('stream');
-const es = require('event-stream');
-const { configure, client } = require('./lib/configure-redis');
+const { configure, redisClient } = require('./lib/configure-redis');
 const elasticClient = require('./lib/configure-elastic').client;
 const { ReadableSearch } = require('elasticsearch-streams');
 
@@ -36,14 +35,14 @@ async function main() {
         writeStream._write = async function (chunk, enc, next) {
             const source = chunk._source;
             // console.log('a hit', source);
-            await client.hmsetAsync(`point:${source.id}`, 'id', source.id, 'x', source.x, 'y', source.y);
+            await redisClient.hmsetAsync(`point:${source.id}`, 'id', source.id, 'x', source.x, 'y', source.y);
             next();
         };
         readStream
             .pipe(writeStream)
                 .on('finish', async () => {
                 console.log('about to quit');
-                await client.quitAsync();
+                await redisClient.quitAsync();
                 console.timeEnd('redis');
             });
 
