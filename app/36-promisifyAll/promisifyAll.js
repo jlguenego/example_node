@@ -1,3 +1,16 @@
+const promisify = (asyncFn, obj) => {
+    return (...args) => new Promise((resolve, reject) => {
+        asyncFn.call(obj, ...args, (err, result) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(result);
+        });
+    });
+};
+
+
 module.exports = function(obj, exceptions) {
     if (exceptions === undefined) {
         exceptions = [];
@@ -9,14 +22,6 @@ module.exports = function(obj, exceptions) {
         if (exceptions.includes(p)) {
             continue;
         }
-        obj[p + 'Promise'] = (...args) => new Promise((resolve, reject) => {
-            obj[p].call(obj, ...args, (err, result) => {
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                resolve(result);
-            });
-        });
+        obj[p + 'Promise'] = promisify(obj[p], obj);
     }
 };
