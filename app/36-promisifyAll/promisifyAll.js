@@ -1,17 +1,15 @@
-const promisify = (asyncFn, obj) => {
-    return (...args) => new Promise((resolve, reject) => {
-        asyncFn.call(obj, ...args, (err, result) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(result);
-        });
-    });
-};
+// The shortest code possible. 
+// Yes, difficult to read 
+// but funny how the functions can embed to themselves... ;)
+// This is the art of functional programming.
+const promisify = (asyncFn, obj) =>
+    (...args) =>
+        new Promise((resolve, reject) =>
+            asyncFn.call(obj, ...args, (err, result) =>
+                err ? reject(err) : resolve(result)));
 
 
-module.exports = function(obj, exceptions) {
+module.exports = function (obj, exceptions) {
     if (exceptions === undefined) {
         exceptions = [];
     }
