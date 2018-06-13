@@ -1,6 +1,16 @@
 const fs = require('fs');
-const util = require('util');
-const appendFileAsync = util.promisify(fs.appendFile);
+
+function appendFileAsync(filename, data) {
+    return new Promise((resolve, reject) => {
+        fs.appendFile(filename, data, err => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve();
+        });
+    });
+}
 
 appendFileAsync('kiki.txt', 'promise1\n').then(r =>
 	appendFileAsync('kiki.txt', 'promise2\n')).then(r =>

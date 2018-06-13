@@ -1,16 +1,7 @@
 const fs = require('fs');
+const util = require('util');
 
-function appendFile(filename, data) {
-    return new Promise((resolve, reject) => {
-        fs.appendFile(filename, data, err => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve();
-        });
-    });
-}
+const appendFile = util.promisify(fs.appendFile);
 
 async function main() {
     try {
