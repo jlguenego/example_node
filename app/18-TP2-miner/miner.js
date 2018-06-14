@@ -43,31 +43,29 @@ if (cluster.isMaster) {
 		workers.push(worker);
 		worker.send(i);
 		worker.on('message', message => {
-            console.log('message from child:', message);
-            while (workers.length) {
-                const c = workers.pop();
-                console.log('killing', c.process.pid);
-                c.process.kill();
-            }
+			console.log('message from child:', message);
+			while (workers.length) {
+				const c = workers.pop();
+				console.log('killing', c.process.pid);
+				c.process.kill();
+			}
 		});
 	}
 	cluster.on('exit', (worker, code, signal) => {
 		console.log(`worker ${worker.process.pid} exit with code: ${code}`);
-    });
-    
-    process.on('exit', () => {
-        console.log(`mining took ${process.uptime()} seconds.`);
-    });
+	});
+
+	process.on('exit', () => {
+		console.log(`mining took ${process.uptime()} seconds.`);
+	});
 } else {
 	// we are in a child.
 	process.on('message', id => {
 		console.log('message from parent:', id);
-		setTimeout(() => {
-			const output = mine(id);
-			if (process.send) {
-				process.send(JSON.stringify(output));
-			}
-		}, 1000);
+		const output = mine(id);
+		if (process.send) {
+			process.send(JSON.stringify(output));
+		}
 
 	});
 
