@@ -33,7 +33,7 @@ class Rest {
 				const extension = req.file.originalname.replace(/^.+\.([^.]+?)$/, '$1').toLowerCase();
 				const dest = `${orig}.${extension}`;
 				fs.renameSync(orig, dest);
-				req.body.img = `${req.protocol}://${req.headers}/${req.file.path}.${extension}`.replace(/\\/g, '/');
+				req.body.img = `${req.protocol}://${req.headers.host}/${req.file.path}.${extension}`.replace(/\\/g, '/');
 			}
 
 			const resource = req.body;
