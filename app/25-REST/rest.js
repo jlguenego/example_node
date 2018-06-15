@@ -88,18 +88,16 @@ class Rest {
 		// delete one
 		app.delete('/:id', (req, res, next) => {
 			console.log('delete one req.url', req.url);
-			const resource = resources.find((r) => {
+			const index = resources.findIndex((r) => {
 				return r.id === +req.params.id;
 			});
-			if (!resource) {
+			if (index === -1) {
 				res.status(404).send({ error: `resource ${name} not found for id ${req.params.id}` });
 				return;
 			}
 			// remove the old resource
-			const index = resources.findIndex((r) => {
-				return r.id === +req.params.id;
-			});
-			resources.splice(index, 1);
+			
+			const [resource] = resources.splice(index, 1);
 
 			res.json({ content: resource });
 		});
