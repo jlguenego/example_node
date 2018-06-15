@@ -77,20 +77,12 @@ class Rest {
 				res.status(404).send({ error: `resource ${name} not found for id ${req.params.id}` });
 				return;
 			}
-			// remove the old resource from the array
-			const index = resources.findIndex((r) => {
-				return r.id === +req.params.id;
-			});
-			resources.splice(index, 1);
+			
 
-			const newResource = Object.assign(resource, req.body);
-			newResource.id = +req.params.id;
-			resources.push(newResource);
-			resources.sort((a, b) => {
-				return Math.sign(a.id - b.id);
-			});
+			Object.assign(resource, req.body);
+			
 
-			res.json({ content: newResource });
+			res.json({ content: resource });
 		});
 
 		// delete one
