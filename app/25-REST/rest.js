@@ -108,7 +108,7 @@ class Rest {
 
 			// remove all
 			resources.length = 0;
-			res.status(204).json({ message: `all ${name} successfully deleted.` });
+			res.json({ message: `all ${name} successfully deleted.` });
 		});
 
 		return app;
