@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 class Rest {
+	
 	resource(name) {
 		const app = express.Router();
 		app.use(bodyParser.json());
@@ -33,7 +34,7 @@ class Rest {
 				return r.id === +req.params.id;
 			});
 			if (!resource) {
-				res.status(404).send({ error: `resource ${name} not found for id ${req.params.id}` });
+				res.status(404).json({ error: `resource ${name} not found for id ${req.params.id}` });
 				return;
 			}
 			res.json({ content: resource });
