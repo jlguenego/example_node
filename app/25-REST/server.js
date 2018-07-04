@@ -5,7 +5,7 @@ const ws = require('./ws.js');
 const app = express();
 
 app.use('/ws', ws);
-
+app.use(express.static('.'));
 app.use(serveIndex('.', { icons: true }));
 
 app.listen(8000, function() {
