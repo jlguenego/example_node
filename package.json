@@ -4,7 +4,7 @@
   "description": "Example of nodeJS stuff.",
   "main": "index.js",
   "scripts": {
-    "test": "cd app && cd 30-mocha && mocha"
+    "test": "mocha app/30-mocha/test"
   },
   "repository": {
     "type": "git",
