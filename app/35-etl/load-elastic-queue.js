@@ -4,8 +4,6 @@ const async = require('async');
 const es = require('event-stream');
 const { configure, client } = require('./lib/configure-elastic');
 
-
-
 const queueSize = 8;
 
 const taskHandler = function (task, done) {
@@ -49,11 +47,9 @@ async function main() {
                     done();
                 });
             }));
-
     } catch (e) {
         console.log('error', e);
     }
 }
 
 main();
-
